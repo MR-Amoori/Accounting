@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting.Businesss", "Acc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounting.Utility", "Accounting.Utility\Accounting.Utility.csproj", "{EE22D0F0-4237-4C84-AF3B-B2716042A69C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{DDAE1162-0560-41D2-9289-C79E21DB4B1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{EE22D0F0-4237-4C84-AF3B-B2716042A69C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE22D0F0-4237-4C84-AF3B-B2716042A69C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE22D0F0-4237-4C84-AF3B-B2716042A69C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDAE1162-0560-41D2-9289-C79E21DB4B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDAE1162-0560-41D2-9289-C79E21DB4B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDAE1162-0560-41D2-9289-C79E21DB4B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDAE1162-0560-41D2-9289-C79E21DB4B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
