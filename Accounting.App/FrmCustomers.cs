@@ -38,5 +38,13 @@ namespace Accounting.App
             txtFilter.Text = null;
             BindGrid();
         }
+
+        private void txtFilter_TextChanged(object sender, EventArgs e)
+        {
+            using (UnitOfWork db=new UnitOfWork())
+            {
+                dgvCustomres.DataSource = db.CustomerRepository.GetCustomerByFilter(txtFilter.Text);
+            }
+        }
     }
 }

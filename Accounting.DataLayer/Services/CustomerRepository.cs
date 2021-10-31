@@ -48,6 +48,11 @@ namespace Accounting.DataLayer
             return db.Customers.ToList();
         }
 
+        public IEnumerable<Customers> GetCustomerByFilter(string Parameter)
+        {
+            return db.Customers.Where(p => p.FullName.Contains(Parameter) || p.Mobile.Contains(Parameter) || p.Emaill.Contains(Parameter)).ToList();
+        }
+
         public Customers GetCustomerbyId(int customerId)
         {
             return db.Customers.Find(customerId);
