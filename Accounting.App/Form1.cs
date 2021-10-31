@@ -16,5 +16,11 @@ namespace Accounting.App
         {
             InitializeComponent();
         }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            FrmCustomers frm = new FrmCustomers();
+            frm.ShowDialog();
+        }
     }
 }
