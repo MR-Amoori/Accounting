@@ -23,6 +23,10 @@ namespace Accounting.DataLayer.UnitOfWork
             }
         }
 
+        public void Save()
+        {
+            db.SaveChanges();
+        }
         public void Dispose()
         {
             db.Dispose();

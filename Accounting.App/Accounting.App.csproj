@@ -118,6 +118,10 @@
       <Project>{480d3156-bb69-4720-b610-0144eeb510a2}</Project>
       <Name>Accounting.DataLayer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Accounting.Utility\Accounting.Utility.csproj">
+      <Project>{ee22d0f0-4237-4c84-af3b-b2716042a69c}</Project>
+      <Name>Accounting.Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1371476120_fingerprint_reader.png" />

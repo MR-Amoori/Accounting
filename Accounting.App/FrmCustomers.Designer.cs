@@ -94,6 +94,7 @@ namespace Accounting.App
             this.btnDeleteCustomer.Size = new System.Drawing.Size(72, 59);
             this.btnDeleteCustomer.Text = "حذف شخص";
             this.btnDeleteCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnDeleteCustomer.Click += new System.EventHandler(this.btnDeleteCustomer_Click);
             // 
             // btnRefresh
             // 
