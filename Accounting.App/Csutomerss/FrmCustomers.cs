@@ -7,15 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Accounting.DataLayer;
 using Accounting.DataLayer.UnitOfWork;
 
 namespace Accounting.App
 {
     public partial class FrmCustomers : Form
     {
+        UnitOfWork db;
         public FrmCustomers()
         {
             InitializeComponent();
+            db = new UnitOfWork();
         }
 
         private void FrmCustomers_Load(object sender, EventArgs e)
@@ -66,6 +69,27 @@ namespace Accounting.App
             else
             {
                 RtlMessageBox.Show("لطفا شخصی را انتخاب کنید!");
+            }
+        }
+
+        private void btnAddCustomer_Click(object sender, EventArgs e)
+        {
+            frmAddOrEditCustomer frmAdd = new frmAddOrEditCustomer();
+            frmAdd.ShowDialog();
+            if (frmAdd.DialogResult == DialogResult.OK)
+            {
+                BindGrid();
+            }  
+        }
+
+        private void btnEditCustomer_Click(object sender, EventArgs e)
+        {
+            int id=int.Parse(dgvCustomres.CurrentRow.Cells[0].Value.ToString());
+            frmAddOrEditCustomer frmEdit = new frmAddOrEditCustomer();
+            frmEdit.CustomerID = id;
+            if (frmEdit.ShowDialog()== DialogResult.OK)
+            {
+                BindGrid();
             }
         }
     }
