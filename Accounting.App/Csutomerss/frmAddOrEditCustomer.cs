@@ -16,6 +16,7 @@ namespace Accounting.App
 {
     public partial class frmAddOrEditCustomer : Form
     {
+        public string LocationPhoto;
         public frmAddOrEditCustomer()
         {
             InitializeComponent();
@@ -46,6 +47,7 @@ namespace Accounting.App
                         Directory.CreateDirectory(Location);
                     }
                     pcCustomer.Image.Save(Location + ImageName);
+
                     Customers customer = new Customers()
                     {
                         FullName = txtName.Text,
@@ -62,12 +64,13 @@ namespace Accounting.App
                     }
                     else
                     {
+                        File.Delete(LocationPhoto);
                         customer.CustomerID = CustomerID;
                         db.CustomerRepository.UpdateCustomer(customer);
                         db.Save();
                         DialogResult = DialogResult.OK;
                     }
-                    
+
                 }
             }
 
@@ -76,11 +79,11 @@ namespace Accounting.App
 
         private void frmAddOrEditCustomer_Load(object sender, EventArgs e)
         {
-            if (CustomerID!=0)
+            if (CustomerID != 0)
             {
                 this.Text = "ویرایش شخص";
                 btnSave.Text = "ویرایش";
-                using (UnitOfWork db=new UnitOfWork())
+                using (UnitOfWork db = new UnitOfWork())
                 {
                     var Customer = db.CustomerRepository.GetCustomerbyId(CustomerID);
                     txtName.Text = Customer.FullName;
@@ -91,5 +94,6 @@ namespace Accounting.App
                 }
             }
         }
+
     }
 }

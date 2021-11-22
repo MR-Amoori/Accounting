@@ -9,31 +9,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Accounting.DataLayer;
 using Accounting.DataLayer.UnitOfWork;
+using System.IO;
 
 namespace Accounting.App
 {
     public partial class FrmCustomers : Form
     {
-        UnitOfWork db;
         public FrmCustomers()
         {
             InitializeComponent();
-            db = new UnitOfWork();
         }
 
         private void FrmCustomers_Load(object sender, EventArgs e)
         {
-            BindGrid();
+                BindGrid();
         }
 
         void BindGrid()
         {
-            using (UnitOfWork db=new UnitOfWork())
+            using (UnitOfWork db = new UnitOfWork())
             {
                 dgvCustomres.AutoGenerateColumns = false;
                 dgvCustomres.DataSource = db.CustomerRepository.GetAllCustomers();
             }
-        
+
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -44,7 +43,7 @@ namespace Accounting.App
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-            using (UnitOfWork db=new UnitOfWork())
+            using (UnitOfWork db = new UnitOfWork())
             {
                 dgvCustomres.DataSource = db.CustomerRepository.GetCustomerByFilter(txtFilter.Text);
             }
@@ -52,19 +51,21 @@ namespace Accounting.App
 
         private void btnDeleteCustomer_Click(object sender, EventArgs e)
         {
-            if (dgvCustomres.CurrentRow!=null)
+            if (dgvCustomres.CurrentRow != null)
             {
-                if (RtlMessageBox.Show($"از حذف {dgvCustomres.CurrentRow.Cells[1].Value.ToString()} مطمئن هستید؟ (این عمل قابل بازگشت نیست)","اخطار",MessageBoxButtons.YesNo, MessageBoxIcon.Warning) ==DialogResult.Yes)
-                { 
+                if (RtlMessageBox.Show($"از حذف {dgvCustomres.CurrentRow.Cells[1].Value.ToString()} مطمئن هستید؟ (این عمل قابل بازگشت نیست)", "اخطار", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
                     using (UnitOfWork db = new UnitOfWork())
                     {
                         int CustomerID = int.Parse(dgvCustomres.CurrentRow.Cells[0].Value.ToString());
-                        var valu = db.CustomerRepository.GetCustomerbyId(CustomerID);
-                        db.CustomerRepository.DeleteCustomer(valu);
+                        var value = db.CustomerRepository.GetCustomerbyId(CustomerID);
+                        var Photo = Application.StartupPath + "/Images/" + value.CustomerImage;
+                        File.Delete(Photo);
+                        db.CustomerRepository.DeleteCustomer(value);
                         db.Save();
                         BindGrid();
                     }
-                } 
+                }
             }
             else
             {
@@ -79,18 +80,25 @@ namespace Accounting.App
             if (frmAdd.DialogResult == DialogResult.OK)
             {
                 BindGrid();
-            }  
+            }
         }
 
         private void btnEditCustomer_Click(object sender, EventArgs e)
         {
-            int id=int.Parse(dgvCustomres.CurrentRow.Cells[0].Value.ToString());
-            frmAddOrEditCustomer frmEdit = new frmAddOrEditCustomer();
-            frmEdit.CustomerID = id;
-            if (frmEdit.ShowDialog()== DialogResult.OK)
+            using (UnitOfWork db=new UnitOfWork())
             {
-                BindGrid();
+                int id = int.Parse(dgvCustomres.CurrentRow.Cells[0].Value.ToString());
+                frmAddOrEditCustomer frmEdit = new frmAddOrEditCustomer();
+                frmEdit.CustomerID = id;
+                Customers customer = db.CustomerRepository.GetCustomerbyId(id);
+                var Photo = Application.StartupPath + "/Images/" + customer.CustomerImage;
+                frmEdit.LocationPhoto = Photo;
+                if (frmEdit.ShowDialog() == DialogResult.OK)
+                {
+                    BindGrid();
+                }
             }
+          
         }
     }
 }
