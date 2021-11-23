@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using Accounting.ViewModels.Customers;
 
 namespace Accounting.DataLayer
 {
@@ -58,6 +59,24 @@ namespace Accounting.DataLayer
             return db.Customers.Find(customerId);
         }
 
+        public List<ListCustomerViewModel> GetNamesCustomers(string Filter = "")
+        {
+            if (Filter == "")
+            {
+                return db.Customers.Select(p => new ListCustomerViewModel()
+                {
+                    CustomerID = p.CustomerID,
+                    FullName = p.FullName
+                }
+                ).ToList();
+            }
+            return db.Customers.Where(p => p.FullName.Contains(Filter)).Select(p => new ListCustomerViewModel()
+            {
+                CustomerID = p.CustomerID,
+                FullName = p.FullName
+            }).ToList();
+        }
+
         public bool InsertCustomer(Customers customer)
         {
             try
@@ -82,6 +101,11 @@ namespace Accounting.DataLayer
             {
                 return false;
             }
+        }
+
+        List<string> ICustomerRepository.GetNamesCustomers(string Filter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

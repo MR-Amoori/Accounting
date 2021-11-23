@@ -10,6 +10,7 @@ namespace Accounting.DataLayer
     {
         List<Customers> GetAllCustomers();
         IEnumerable<Customers> GetCustomerByFilter(string Parameter);
+        List<string> GetNamesCustomers(string Filter = "");
         Customers GetCustomerbyId(int customerId);
         bool InsertCustomer(Customers customer);
         bool UpdateCustomer(Customers customer);
