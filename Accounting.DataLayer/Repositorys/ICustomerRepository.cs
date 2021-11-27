@@ -16,6 +16,6 @@ namespace Accounting.DataLayer
         bool UpdateCustomer(Customers customer);
         bool DeleteCustomer(int customerId);
         bool DeleteCustomer(Customers customer);
-    
+        string GetCustomerNameById(int customerId);
     }
 }
