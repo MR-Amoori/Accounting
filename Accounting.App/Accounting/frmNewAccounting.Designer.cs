@@ -273,7 +273,7 @@ namespace Accounting.App
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "تراکنش جدید";
-            this.Load += new System.EventHandler(this.txtfilter_TextChanged);
+            this.Load += new System.EventHandler(this.frmNewAccounting_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
