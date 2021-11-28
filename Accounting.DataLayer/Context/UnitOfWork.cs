@@ -37,6 +37,19 @@ namespace Accounting.DataLayer.UnitOfWork
             }
         }
 
+        private GenericRepository<Login> _login;
+        public GenericRepository<Login> Login
+        {
+            get
+            {
+                if (_login==null)
+                {
+                    _login = new GenericRepository<Login>(db);
+                }
+                return _login;
+            }
+        }
+
         public void Save()
         {
             db.SaveChanges();
